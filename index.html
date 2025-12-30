@@ -1,0 +1,1180 @@
+<!-- index.html -->
+<!-- Dónde cambiar: 
+  - WHATSAPP_NUMBER: en script.js (const WHATSAPP_NUMBER)
+  - CONTACT_EMAIL: en el action del formulario (más abajo)
+  - CHAT_WIDGET_ID: en script.js (bloque Live Chat)
+  - SECCIONES: editar dentro de cada <section> marcada
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Jonathan R. | Productos Ancla & Marcas</title>
+    <meta
+      name="description"
+      content="Renovación de sitio estilo Zoro: catálogo sin carrito, solicitud de cotización, marcas y atención al cliente por chat."
+    />
+    <link rel="icon" href="imagenes/favicon.jpg" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Si no quieren fuentes externas, borrar la línea siguiente y queda con system-ui -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <meta
+      property="og:title"
+      content="Jonathan R. | Productos Ancla & Marcas"
+    />
+    <meta
+      property="og:description"
+      content="Catálogo sin carrito con solicitud de cotización y chat en vivo."
+    />
+    <meta property="og:type" content="website" />
+  </head>
+  <body>
+    <!-- ===== HEADER ===== -->
+    <header class="site-header" aria-label="Cabecera del sitio">
+      <div class="container header-wrap">
+        <a href="#" class="brand" aria-label="Inicio">Inicio MRO</a>
+        <nav class="site-nav" aria-label="Navegación principal">
+          <button
+            class="nav-toggle"
+            aria-expanded="false"
+            aria-controls="nav-menu"
+            aria-label="Abrir menú"
+          >
+            ☰
+          </button>
+          <ul id="nav-menu">
+            <li><a href="#productos">Productos</a></li>
+            <li><a href="#marcas">Marcas</a></li>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <!-- BUSCADOR + CATEGORÍAS -->
+    <div class="site-search" role="search">
+      <div class="container">
+        <form
+          id="search-form"
+          onsubmit="event.preventDefault();"
+          class="search-row"
+        >
+          <input
+            id="search"
+            type="search"
+            placeholder="¿Qué necesitás hoy? (producto, marca, SKU)"
+            autocomplete="off"
+          />
+          <button class="btn btn-primary">Buscar</button>
+        </form>
+
+        <div class="quick-cats" aria-label="Categorías rápidas">
+          <button class="chip is-active" data-cat="*">Todas</button>
+          <button class="chip" data-cat="Guantes">Guantes</button>
+          <button class="chip" data-cat="Herramientas">Herramientas</button>
+          <button class="chip" data-cat="SKF">SKF</button>
+        </div>
+      </div>
+    </div>
+
+    <main id="top">
+      <!-- ===== HERO ===== -->
+      <section class="section hero hero--premium" aria-label="Portada">
+        <div class="container hero-grid">
+          <!-- Columna copy -->
+          <div class="hero-copy">
+            <span class="hero-badge">
+              <span class="dot" aria-hidden="true"></span> Catálogo para
+              maquiladoras
+            </span>
+
+            <h1 class="hero-title">
+              Potenciamos tus
+              <span class="text-accent gradient">productos ancla</span> y marcas
+            </h1>
+
+            <p class="hero-subtitle">
+              Catálogo sin carrito para maquiladoras con
+              <strong>cotización inmediata</strong> y
+              <strong>chat de atención</strong>. Integración simple, soporte
+              real.
+            </p>
+
+            <div class="cta-row">
+              <a href="#productos" class="btn btn-primary btn-lg"
+                >Ver productos</a
+              >
+              <button class="btn btn-outline btn-lg" onclick="openModal()">
+                Solicitar cotización
+              </button>
+            </div>
+
+            <ul class="trust-row" aria-label="Fortalezas del servicio">
+              <li class="trust-item">Respuesta rápida</li>
+              <li class="trust-item">Atención dedicada</li>
+              <li class="trust-item">Integración simple</li>
+            </ul>
+          </div>
+
+          <!-- Columna media -->
+          <div class="hero-media">
+            <figure class="media-frame" aria-label="Vista de planta industrial">
+              <img
+                src="imagenes/planta2.png"
+                alt="Fachada de planta"
+                fetchpriority="high"
+                decoding="async"
+              />
+
+              <!-- Tarjeta flotante (confianza) -->
+              <figcaption class="float-card" aria-live="polite">
+                <div class="mini-kpi">
+                  <span class="kpi-number">24h</span>
+                  <span class="kpi-label">tiempo de respuesta</span>
+                </div>
+                <div class="mini-kpi">
+                  <span class="kpi-number">+120</span>
+                  <span class="kpi-label">SKUs integrados</span>
+                </div>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== PRODUCTOS ===== -->
+      <section
+        id="productos"
+        class="section products"
+        aria-label="Productos ancla"
+      >
+        <nav class="breadcrumbs" aria-label="Ruta">
+          <a href="#top">Inicio</a> <span aria-hidden="true">›</span>
+          <span id="crumb-cat">Todos</span>
+        </nav>
+
+        <div class="container">
+          <div class="section-head">
+            <h2>Productos ancla</h2>
+            <p class="section-sub">
+              Seleccionados por demanda y disponibilidad constante.
+            </p>
+            <!-- ===== UPDATE D: Microcopy extra ===== -->
+            <p class="section-sub">
+              Respuesta &lt;24h · +120 SKUs integrados · Atención L-V 9–18
+            </p>
+          </div>
+
+          <!-- ===== UPDATE C: Catálogo con filtros laterales y grid ===== -->
+          <div class="catalog-toolbar">
+            <button id="toggle-filters" class="btn btn-outline">Filtros</button>
+          </div>
+
+          <div class="catalog-layout">
+            <aside
+              class="filters"
+              id="filters"
+              aria-label="Filtros de catálogo"
+            >
+              <h3>Filtrar</h3>
+              <div class="filter-group">
+                <strong>Categoría</strong>
+                <label
+                  ><input type="checkbox" name="cat" value="Guantes" checked />
+                  Guantes</label
+                >
+                <label
+                  ><input
+                    type="checkbox"
+                    name="cat"
+                    value="Herramientas"
+                    checked
+                  />
+                  Herramientas</label
+                >
+                <label
+                  ><input type="checkbox" name="cat" value="SKF" checked />
+                  SKF</label
+                >
+              </div>
+              <div class="filter-group">
+                <strong>Marca</strong>
+                <label
+                  ><input type="checkbox" name="brand" value="3M" checked />
+                  3M</label
+                >
+                <label
+                  ><input type="checkbox" name="brand" value="Bosch" checked />
+                  Bosch</label
+                >
+                <label
+                  ><input type="checkbox" name="brand" value="SKF" checked />
+                  SKF</label
+                >
+                <label
+                  ><input type="checkbox" name="brand" value="Makita" checked />
+                  Makita</label
+                >
+                <label
+                  ><input
+                    type="checkbox"
+                    name="brand"
+                    value="Siemens"
+                    checked
+                  />
+                  Siemens</label
+                >
+              </div>
+              <button class="btn btn-ghost" id="clear-filters">Limpiar</button>
+            </aside>
+
+            <div class="listing">
+              <div class="grid-cards products-grid">
+                <!-- Card 1 -->
+                <article
+                  class="card"
+                  aria-labelledby="prod1-title"
+                  data-product="Producto 1"
+                  data-category="Guantes"
+                  data-brand="3M"
+                  data-sku="GSR-240"
+                >
+                  <div class="card-media">
+                    <span class="card-badge top">Top</span>
+                    <img
+                      src="imagenes/planta1.png"
+                      alt="Línea de producción industrial"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div class="card-body">
+                    <h3 id="prod1-title" class="card-title">Producto 1</h3>
+                    <ul class="card-attrs">
+                      <li>Atributo clave 1</li>
+                      <li>Atributo clave 2</li>
+                      <li>Atributo clave 3</li>
+                    </ul>
+                    <p class="card-sku">SKU: GSR-240</p>
+                    <div class="card-actions">
+                      <button class="btn btn-primary" data-open-modal>
+                        Cotizar
+                      </button>
+                      <a class="btn btn-link" href="#contacto">Más info</a>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Card 2 -->
+                <article
+                  class="card"
+                  aria-labelledby="prod2-title"
+                  data-product="Producto 2"
+                  data-category="Herramientas"
+                  data-brand="Bosch"
+                  data-sku="TPR-500"
+                >
+                  <div class="card-media">
+                    <span class="card-badge new">Nuevo</span>
+                    <img
+                      src="imagenes/planta4.png"
+                      alt="Centro logístico con muelles de carga"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div class="card-body">
+                    <h3 id="prod2-title" class="card-title">Producto 2</h3>
+                    <ul class="card-attrs">
+                      <li>Atributo clave 1</li>
+                      <li>Atributo clave 2</li>
+                      <li>Atributo clave 3</li>
+                    </ul>
+                    <p class="card-sku">SKU: TPR-500</p>
+                    <div class="card-actions">
+                      <button class="btn btn-primary" data-open-modal>
+                        Cotizar
+                      </button>
+                      <a class="btn btn-link" href="#contacto">Más info</a>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Card 3 -->
+                <article
+                  class="card"
+                  aria-labelledby="prod3-title"
+                  data-product="Producto 3"
+                  data-category="SKF"
+                  data-brand="SKF"
+                  data-sku="RSK-130"
+                >
+                  <div class="card-media">
+                    <span class="card-badge stock">En stock</span>
+                    <img
+                      src="imagenes/planta3.png"
+                      alt="Robótica industrial en línea de ensamblaje"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div class="card-body">
+                    <h3 id="prod3-title" class="card-title">Producto 3</h3>
+                    <ul class="card-attrs">
+                      <li>Atributo clave 1</li>
+                      <li>Atributo clave 2</li>
+                      <li>Atributo clave 3</li>
+                    </ul>
+                    <p class="card-sku">SKU: RSK-130</p>
+                    <div class="card-actions">
+                      <button class="btn btn-primary" data-open-modal>
+                        Cotizar
+                      </button>
+                      <a class="btn btn-link" href="#contacto">Más info</a>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Card 4 -->
+                <article
+                  class="card"
+                  aria-labelledby="prod2-title"
+                  data-product="Producto 2"
+                  data-category="Herramientas"
+                  data-brand="Bosch"
+                  data-sku="TPR-500"
+                >
+                  <div class="card-media">
+                    <span class="card-badge new">Nuevo</span>
+                    <img
+                      src="imagenes/planta4.png"
+                      alt="Centro logístico con muelles de carga"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div class="card-body">
+                    <h3 id="prod2-title" class="card-title">Producto 4</h3>
+                    <ul class="card-attrs">
+                      <li>Atributo clave 1</li>
+                      <li>Atributo clave 2</li>
+                      <li>Atributo clave 3</li>
+                    </ul>
+                    <p class="card-sku">SKU: TPR-500</p>
+                    <div class="card-actions">
+                      <button class="btn btn-primary" data-open-modal>
+                        Cotizar
+                      </button>
+                      <a class="btn btn-link" href="#contacto">Más info</a>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Card 5 -->
+                <article
+                  class="card"
+                  aria-labelledby="prod2-title"
+                  data-product="Producto 2"
+                  data-category="Herramientas"
+                  data-brand="Bosch"
+                  data-sku="TPR-500"
+                >
+                  <div class="card-media">
+                    <span class="card-badge new">Nuevo</span>
+                    <img
+                      src="imagenes/planta4.png"
+                      alt="Centro logístico con muelles de carga"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div class="card-body">
+                    <h3 id="prod2-title" class="card-title">Producto 5</h3>
+                    <ul class="card-attrs">
+                      <li>Atributo clave 1</li>
+                      <li>Atributo clave 2</li>
+                      <li>Atributo clave 3</li>
+                    </ul>
+                    <p class="card-sku">SKU: TPR-500</p>
+                    <div class="card-actions">
+                      <button class="btn btn-primary" data-open-modal>
+                        Cotizar
+                      </button>
+                      <a class="btn btn-link" href="#contacto">Más info</a>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Card 6 -->
+                <article
+                  class="card"
+                  aria-labelledby="prod2-title"
+                  data-product="Producto 2"
+                  data-category="Herramientas"
+                  data-brand="Bosch"
+                  data-sku="TPR-500"
+                >
+                  <div class="card-media">
+                    <span class="card-badge new">Nuevo</span>
+                    <img
+                      src="imagenes/planta4.png"
+                      alt="Centro logístico con muelles de carga"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div class="card-body">
+                    <h3 id="prod2-title" class="card-title">Producto 6</h3>
+                    <ul class="card-attrs">
+                      <li>Atributo clave 1</li>
+                      <li>Atributo clave 2</li>
+                      <li>Atributo clave 3</li>
+                    </ul>
+                    <p class="card-sku">SKU: TPR-500</p>
+                    <div class="card-actions">
+                      <button class="btn btn-primary" data-open-modal>
+                        Cotizar
+                      </button>
+                      <a class="btn btn-link" href="#contacto">Más info</a>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Card 7 -->
+                <article
+                  class="card"
+                  aria-labelledby="prod2-title"
+                  data-product="Producto 2"
+                  data-category="Herramientas"
+                  data-brand="Bosch"
+                  data-sku="TPR-500"
+                >
+                  <div class="card-media">
+                    <span class="card-badge new">Nuevo</span>
+                    <img
+                      src="imagenes/planta4.png"
+                      alt="Centro logístico con muelles de carga"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div class="card-body">
+                    <h3 id="prod2-title" class="card-title">Producto 7</h3>
+                    <ul class="card-attrs">
+                      <li>Atributo clave 1</li>
+                      <li>Atributo clave 2</li>
+                      <li>Atributo clave 3</li>
+                    </ul>
+                    <p class="card-sku">SKU: TPR-500</p>
+                    <div class="card-actions">
+                      <button class="btn btn-primary" data-open-modal>
+                        Cotizar
+                      </button>
+                      <a class="btn btn-link" href="#contacto">Más info</a>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Card 8 -->
+                <article
+                  class="card"
+                  aria-labelledby="prod2-title"
+                  data-product="Producto 2"
+                  data-category="Herramientas"
+                  data-brand="Bosch"
+                  data-sku="TPR-500"
+                >
+                  <div class="card-media">
+                    <span class="card-badge new">Nuevo</span>
+                    <img
+                      src="imagenes/planta4.png"
+                      alt="Centro logístico con muelles de carga"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div class="card-body">
+                    <h3 id="prod2-title" class="card-title">Producto 8</h3>
+                    <ul class="card-attrs">
+                      <li>Atributo clave 1</li>
+                      <li>Atributo clave 2</li>
+                      <li>Atributo clave 3</li>
+                    </ul>
+                    <p class="card-sku">SKU: TPR-500</p>
+                    <div class="card-actions">
+                      <button class="btn btn-primary" data-open-modal>
+                        Cotizar
+                      </button>
+                      <a class="btn btn-link" href="#contacto">Más info</a>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Card 9 -->
+                <article
+                  class="card"
+                  aria-labelledby="prod2-title"
+                  data-product="Producto 2"
+                  data-category="Herramientas"
+                  data-brand="Bosch"
+                  data-sku="TPR-500"
+                >
+                  <div class="card-media">
+                    <span class="card-badge new">Nuevo</span>
+                    <img
+                      src="imagenes/planta4.png"
+                      alt="Centro logístico con muelles de carga"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div class="card-body">
+                    <h3 id="prod2-title" class="card-title">Producto 9</h3>
+                    <ul class="card-attrs">
+                      <li>Atributo clave 1</li>
+                      <li>Atributo clave 2</li>
+                      <li>Atributo clave 3</li>
+                    </ul>
+                    <p class="card-sku">SKU: TPR-500</p>
+                    <div class="card-actions">
+                      <button class="btn btn-primary" data-open-modal>
+                        Cotizar
+                      </button>
+                      <a class="btn btn-link" href="#contacto">Más info</a>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Card 10 -->
+                <article
+                  class="card"
+                  aria-labelledby="prod2-title"
+                  data-product="Producto 2"
+                  data-category="Herramientas"
+                  data-brand="Bosch"
+                  data-sku="TPR-500"
+                >
+                  <div class="card-media">
+                    <span class="card-badge new">Nuevo</span>
+                    <img
+                      src="imagenes/planta4.png"
+                      alt="Centro logístico con muelles de carga"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div class="card-body">
+                    <h3 id="prod2-title" class="card-title">Producto 10</h3>
+                    <ul class="card-attrs">
+                      <li>Atributo clave 1</li>
+                      <li>Atributo clave 2</li>
+                      <li>Atributo clave 3</li>
+                    </ul>
+                    <p class="card-sku">SKU: TPR-500</p>
+                    <div class="card-actions">
+                      <button class="btn btn-primary" data-open-modal>
+                        Cotizar
+                      </button>
+                      <a class="btn btn-link" href="#contacto">Más info</a>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Card 11 -->
+                <article
+                  class="card"
+                  aria-labelledby="prod2-title"
+                  data-product="Producto 2"
+                  data-category="Herramientas"
+                  data-brand="Bosch"
+                  data-sku="TPR-500"
+                >
+                  <div class="card-media">
+                    <span class="card-badge new">Nuevo</span>
+                    <img
+                      src="imagenes/planta4.png"
+                      alt="Centro logístico con muelles de carga"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div class="card-body">
+                    <h3 id="prod2-title" class="card-title">Producto 11</h3>
+                    <ul class="card-attrs">
+                      <li>Atributo clave 1</li>
+                      <li>Atributo clave 2</li>
+                      <li>Atributo clave 3</li>
+                    </ul>
+                    <p class="card-sku">SKU: TPR-500</p>
+                    <div class="card-actions">
+                      <button class="btn btn-primary" data-open-modal>
+                        Cotizar
+                      </button>
+                      <a class="btn btn-link" href="#contacto">Más info</a>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Card 12 -->
+                <article
+                  class="card"
+                  aria-labelledby="prod2-title"
+                  data-product="Producto 2"
+                  data-category="Herramientas"
+                  data-brand="Bosch"
+                  data-sku="TPR-500"
+                >
+                  <div class="card-media">
+                    <span class="card-badge new">Nuevo</span>
+                    <img
+                      src="imagenes/planta4.png"
+                      alt="Centro logístico con muelles de carga"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div class="card-body">
+                    <h3 id="prod2-title" class="card-title">Producto 12</h3>
+                    <ul class="card-attrs">
+                      <li>Atributo clave 1</li>
+                      <li>Atributo clave 2</li>
+                      <li>Atributo clave 3</li>
+                    </ul>
+                    <p class="card-sku">SKU: TPR-500</p>
+                    <div class="card-actions">
+                      <button class="btn btn-primary" data-open-modal>
+                        Cotizar
+                      </button>
+                      <a class="btn btn-link" href="#contacto">Más info</a>
+                    </div>
+                  </div>
+                </article>
+                <!-- Card 13 -->
+                <article
+                  class="card"
+                  aria-labelledby="prod2-title"
+                  data-product="Producto 2"
+                  data-category="Herramientas"
+                  data-brand="Bosch"
+                  data-sku="TPR-500"
+                >
+                  <div class="card-media">
+                    <span class="card-badge new">Nuevo</span>
+                    <img
+                      src="imagenes/planta4.png"
+                      alt="Centro logístico con muelles de carga"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div class="card-body">
+                    <h3 id="prod2-title" class="card-title">Producto 13</h3>
+                    <ul class="card-attrs">
+                      <li>Atributo clave 1</li>
+                      <li>Atributo clave 2</li>
+                      <li>Atributo clave 3</li>
+                    </ul>
+                    <p class="card-sku">SKU: TPR-500</p>
+                    <div class="card-actions">
+                      <button class="btn btn-primary" data-open-modal>
+                        Cotizar
+                      </button>
+                      <a class="btn btn-link" href="#contacto">Más info</a>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Card 14 -->
+                <article
+                  class="card"
+                  aria-labelledby="prod2-title"
+                  data-product="Producto 2"
+                  data-category="Herramientas"
+                  data-brand="Bosch"
+                  data-sku="TPR-500"
+                >
+                  <div class="card-media">
+                    <span class="card-badge new">Nuevo</span>
+                    <img
+                      src="imagenes/planta4.png"
+                      alt="Centro logístico con muelles de carga"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div class="card-body">
+                    <h3 id="prod2-title" class="card-title">Producto 2</h3>
+                    <ul class="card-attrs">
+                      <li>Atributo clave 1</li>
+                      <li>Atributo clave 14</li>
+                      <li>Atributo clave 3</li>
+                    </ul>
+                    <p class="card-sku">SKU: TPR-500</p>
+                    <div class="card-actions">
+                      <button class="btn btn-primary" data-open-modal>
+                        Cotizar
+                      </button>
+                      <a class="btn btn-link" href="#contacto">Más info</a>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Card 15 -->
+                <article
+                  class="card"
+                  aria-labelledby="prod2-title"
+                  data-product="Producto 2"
+                  data-category="Herramientas"
+                  data-brand="Bosch"
+                  data-sku="TPR-500"
+                >
+                  <div class="card-media">
+                    <span class="card-badge new">Nuevo</span>
+                    <img
+                      src="imagenes/planta4.png"
+                      alt="Centro logístico con muelles de carga"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div class="card-body">
+                    <h3 id="prod2-title" class="card-title">Producto 15</h3>
+                    <ul class="card-attrs">
+                      <li>Atributo clave 1</li>
+                      <li>Atributo clave 2</li>
+                      <li>Atributo clave 3</li>
+                    </ul>
+                    <p class="card-sku">SKU: TPR-500</p>
+                    <div class="card-actions">
+                      <button class="btn btn-primary" data-open-modal>
+                        Cotizar
+                      </button>
+                      <a class="btn btn-link" href="#contacto">Más info</a>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Card 16 -->
+                <article
+                  class="card"
+                  aria-labelledby="prod2-title"
+                  data-product="Producto 2"
+                  data-category="Herramientas"
+                  data-brand="Bosch"
+                  data-sku="TPR-500"
+                >
+                  <div class="card-media">
+                    <span class="card-badge new">Nuevo</span>
+                    <img
+                      src="imagenes/planta4.png"
+                      alt="Centro logístico con muelles de carga"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div class="card-body">
+                    <h3 id="prod2-title" class="card-title">Producto 16</h3>
+                    <ul class="card-attrs">
+                      <li>Atributo clave 1</li>
+                      <li>Atributo clave 2</li>
+                      <li>Atributo clave 3</li>
+                    </ul>
+                    <p class="card-sku">SKU: TPR-500</p>
+                    <div class="card-actions">
+                      <button class="btn btn-primary" data-open-modal>
+                        Cotizar
+                      </button>
+                      <a class="btn btn-link" href="#contacto">Más info</a>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Podés sumar Card 4, 5, etc. con data-category/brand/sku -->
+              </div>
+
+              <div class="list-foot">
+                <button
+                  id="load-less"
+                  class="btn btn-outline"
+                  aria-label="Mostrar menos productos"
+                  hidden
+                >
+                  Mostrar menos
+                </button>
+                <button
+                  id="load-more"
+                  class="btn btn-outline"
+                  aria-label="Cargar más productos"
+                >
+                  Cargar más
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- ===== /UPDATE C ===== -->
+        </div>
+      </section>
+
+      <!-- ===== MARCAS ===== -->
+      <section
+        id="marcas"
+        class="section brands"
+        aria-label="Marcas de proveedores"
+      >
+        <div class="container">
+          <header class="section-head section-head--center">
+            <p class="eyebrow">Partners & Proveedores</p>
+            <h2>Marcas que representamos</h2>
+            <p class="section-sub">
+              Seleccionadas por su <strong>calidad</strong>, disponibilidad y
+              <strong>soporte</strong> constante.
+            </p>
+          </header>
+
+          <ul class="logo-wall" role="list">
+            <!-- DEWALT -->
+            <li class="logo-card" role="listitem" aria-label="DEWALT">
+              <svg
+                class="logo-svg"
+                viewBox="0 0 200 60"
+                aria-hidden="true"
+                focusable="false"
+                preserveAspectRatio="xMidYMid meet"
+              >
+                <defs>
+                  <linearGradient id="dewaltGrad" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#ffd100" />
+                    <stop offset="100%" stop-color="#ffb300" />
+                  </linearGradient>
+                </defs>
+                <rect
+                  x="2"
+                  y="2"
+                  width="196"
+                  height="56"
+                  rx="10"
+                  fill="url(#dewaltGrad)"
+                  stroke="#111827"
+                  stroke-width="3"
+                />
+                <text
+                  x="100"
+                  y="50%"
+                  dy=".35em"
+                  text-anchor="middle"
+                  font-size="26"
+                  font-weight="800"
+                  fill="#111827"
+                  font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif"
+                >
+                  DEWALT
+                </text>
+              </svg>
+            </li>
+
+            <!-- BLACK+DECKER -->
+            <li class="logo-card" role="listitem" aria-label="BLACK+DECKER">
+              <svg
+                class="logo-svg"
+                viewBox="0 0 200 60"
+                aria-hidden="true"
+                focusable="false"
+                preserveAspectRatio="xMidYMid meet"
+              >
+                <rect
+                  x="2"
+                  y="2"
+                  width="196"
+                  height="56"
+                  rx="10"
+                  fill="#f47321"
+                />
+                <rect
+                  x="4.5"
+                  y="4.5"
+                  width="191"
+                  height="51"
+                  rx="8"
+                  fill="none"
+                  stroke="#111827"
+                  stroke-width="3"
+                />
+                <text
+                  x="100"
+                  y="50%"
+                  dy=".35em"
+                  text-anchor="middle"
+                  font-size="20"
+                  font-weight="800"
+                  fill="#111827"
+                  font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif"
+                >
+                  BLACK+DECKER
+                </text>
+              </svg>
+            </li>
+
+            <!-- BOSCH -->
+            <li class="logo-card" role="listitem" aria-label="BOSCH">
+              <svg
+                class="logo-svg"
+                viewBox="0 0 200 60"
+                aria-hidden="true"
+                focusable="false"
+                preserveAspectRatio="xMidYMid meet"
+              >
+                <rect
+                  x="2"
+                  y="2"
+                  width="196"
+                  height="56"
+                  rx="10"
+                  fill="#ffffff"
+                  stroke="#d1d5db"
+                  stroke-width="2"
+                />
+                <text
+                  x="100"
+                  y="50%"
+                  dy=".35em"
+                  text-anchor="middle"
+                  font-size="26"
+                  font-weight="800"
+                  fill="#e11d48"
+                  font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif"
+                >
+                  BOSCH
+                </text>
+              </svg>
+            </li>
+
+            <!-- PHILIPS -->
+            <li class="logo-card" role="listitem" aria-label="PHILIPS">
+              <svg
+                class="logo-svg"
+                viewBox="0 0 200 60"
+                aria-hidden="true"
+                focusable="false"
+                preserveAspectRatio="xMidYMid meet"
+              >
+                <rect
+                  x="2"
+                  y="2"
+                  width="196"
+                  height="56"
+                  rx="10"
+                  fill="#0a6ece"
+                />
+                <text
+                  x="100"
+                  y="50%"
+                  dy=".35em"
+                  text-anchor="middle"
+                  font-size="24"
+                  font-weight="800"
+                  fill="#ffffff"
+                  font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif"
+                >
+                  PHILIPS
+                </text>
+              </svg>
+            </li>
+          </ul>
+
+          <div class="brands-foot">
+            <div class="badges">
+              <span class="badge">Garantía oficial</span>
+              <span class="badge">Stock constante</span>
+              <span class="badge">Integración simple</span>
+            </div>
+            <a href="#contacto" class="btn btn-ghost"
+              >¿Querés sumar tu marca?</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== SOBRE ===== -->
+      <section id="sobre" class="section about" aria-label="Sobre nosotros">
+        <div class="container">
+          <div class="about-grid">
+            <div class="about-copy">
+              <p class="eyebrow">Quiénes somos</p>
+              <h2>Sobre nosotros</h2>
+
+              <p class="about-lead">
+                Atendemos principalmente a maquiladoras. Trabajamos con stock y
+                proveedores validados para ofrecer soluciones confiables y
+                tiempos de respuesta cortos.
+              </p>
+
+              <ul class="about-list" role="list">
+                <li>Stock validado y disponibilidad constante</li>
+                <li>Integración simple con tu operación</li>
+                <li>Soporte técnico ágil y confiable</li>
+              </ul>
+
+              <div class="about-badges">
+                <span class="badge">Garantía oficial</span>
+                <span class="badge">Proveedores auditados</span>
+                <span class="badge">Respuesta rápida</span>
+              </div>
+
+              <div class="about-cta">
+                <a href="#contacto" class="btn btn-outline">Conversemos</a>
+              </div>
+            </div>
+
+            <figure class="about-media media-frame">
+              <img
+                src="./imagenes/planta5.png"
+                alt="Planta industrial moderna, procesos organizados"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== CONTACTO ===== -->
+      <section id="contacto" class="section contact" aria-label="Contacto">
+        <div class="container">
+          <header class="section-head section-head--center">
+            <p class="eyebrow">Hablemos</p>
+            <h2>Contacto</h2>
+            <p class="section-sub">
+              Contanos qué necesitás y te respondemos a la brevedad.
+            </p>
+          </header>
+
+          <div class="contact-box">
+            <ul class="contact-highlights" role="list">
+              <li>Respuesta en menos de 24&nbsp;hs</li>
+              <li>Atención L–V 9 a 18&nbsp;hs</li>
+              <li>Envíos a todo el país</li>
+            </ul>
+
+            <div class="cta-row">
+              <button class="btn btn-primary btn-lg" data-open-modal>
+                Abrir formulario
+              </button>
+
+              <a
+                id="cta-whatsapp"
+                class="btn btn-outline btn-lg"
+                href="#"
+                target="_blank"
+                rel="noopener"
+                >Escribir por WhatsApp</a
+              >
+            </div>
+
+            <p class="contact-privacy">
+              Tu consulta es privada. No compartimos tus datos.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer" aria-label="Pie del sitio">
+      <div class="container footer-wrap">
+        <p class="footer-copy">
+          &copy; <span id="year">2025</span> Jonathan R. — Todos los derechos
+          reservados.
+        </p>
+
+        <nav class="footer-nav" aria-label="Enlaces del pie">
+          <ul class="footer-links">
+            <li><a href="#top">Volver arriba</a></li>
+            <li><a href="#productos">Productos</a></li>
+            <li><a href="#marcas">Marcas</a></li>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+
+    <!-- ===== MODAL COTIZACIÓN ===== -->
+    <div
+      id="modal"
+      class="modal"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+    >
+      <div class="modal-dialog" role="document">
+        <button class="modal-close" aria-label="Cerrar" onclick="closeModal()">
+          &times;
+        </button>
+        <h2 id="modal-title" class="modal-title">Solicitar cotización</h2>
+        <!-- CONTACT_EMAIL: cambiá el correo acá si no usás el default -->
+        <form
+          id="quote-form"
+          action="https://formsubmit.co/mi-email@ejemplo.com"
+          method="POST"
+          class="form"
+        >
+          <input
+            type="hidden"
+            name="_subject"
+            value="Cotización desde la web"
+          />
+          <input type="hidden" name="_template" value="table" />
+          <label>
+            <span>Nombre</span>
+            <input type="text" name="nombre" required />
+          </label>
+          <label>
+            <span>Email</span>
+            <input type="email" name="email" required />
+          </label>
+          <label>
+            <span>Empresa (opcional)</span>
+            <input type="text" name="empresa" />
+          </label>
+          <label>
+            <span>Mensaje / Detalles</span>
+            <textarea
+              name="mensaje"
+              required
+              placeholder="Quiero cotizar: [producto]"
+            ></textarea>
+          </label>
+          <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Botón flotante WhatsApp -->
+    <a
+      id="whatsapp-btn"
+      class="whatsapp-fab is-pulsing"
+      href="#"
+      target="_blank"
+      rel="noopener"
+      aria-label="Escribir por WhatsApp"
+    >
+      <img
+        src="./imagenes/whatsapp.png"
+        alt=""
+        width="28"
+        height="28"
+        loading="lazy"
+        decoding="async"
+      />
+    </a>
+
+    <script src="script.js"></script>
+  </body>
+</html>
