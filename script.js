@@ -57,10 +57,30 @@ updateWaLinks();
 // ===== NAV RESPONSIVE =====
 const toggle = document.querySelector(".nav-toggle");
 const menu = document.getElementById("nav-menu");
+
 if (toggle && menu) {
-  toggle.addEventListener("click", () => {
+  // Abrir/cerrar con el botón
+  toggle.addEventListener("click", (e) => {
+    e.stopPropagation();
     const open = menu.classList.toggle("open");
     toggle.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+
+  // Cerrar tocando fuera del menú
+  document.addEventListener("click", (e) => {
+    const insideNav = e.target.closest(".site-nav");
+    if (!insideNav && menu.classList.contains("open")) {
+      menu.classList.remove("open");
+      toggle.setAttribute("aria-expanded", "false");
+    }
+  });
+
+  // Cerrar al tocar un link del menú
+  menu.addEventListener("click", (e) => {
+    if (e.target.closest("a")) {
+      menu.classList.remove("open");
+      toggle.setAttribute("aria-expanded", "false");
+    }
   });
 }
 
