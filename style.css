@@ -19,6 +19,9 @@ body {
   font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, Arial, sans-serif;
   line-height: 1.5;
+
+  /* FIX: evita que un elemento “se vaya” a la derecha y corra toda la página */
+  overflow-x: hidden;
 }
 
 /* Prefiere menos movimiento */
@@ -978,13 +981,34 @@ body {
   z-index: 9;
   background: #fff;
   border-bottom: 1px solid #e5e7eb;
-  padding: 10px 0;
+
+  /* FIX: padding lateral real (en tu captura se ve pegado al borde) */
+  padding: 10px 20px;
 }
+
 .search-row {
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 10px;
+  min-width: 0; /* FIX overflow */
 }
+
+.search-row input {
+  min-width: 0; /* FIX overflow en grid */
+}
+
+/* FIX MOBILE: apilar input + botón */
+@media (max-width: 520px) {
+  .search-row {
+    grid-template-columns: 1fr;
+  }
+  .search-row .btn,
+  .search-row button,
+  .search-row a {
+    width: 100%;
+  }
+}
+
 .search-row input {
   border: 1px solid #e5e7eb;
   border-radius: 12px;
