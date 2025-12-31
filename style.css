@@ -996,9 +996,11 @@ body {
 }
 
 .breadcrumbs {
-  color: #94a3b8; /* gris claro, menos protagonista */
-  font-size: 0.85rem; /* más chico que el texto normal */
-  margin-bottom: 12px; /* un poco más de aire */
+  color: #94a3b8;
+  font-size: 0.85rem;
+  margin: 0 auto 12px;     /* centra el bloque */
+  max-width: 1200px;       /* mismo ancho que .container */
+  padding: 0 20px;         /* mismo padding que .container */
 }
 
 .breadcrumbs a {
