@@ -168,9 +168,16 @@ cards.forEach((c) => io.observe(c));
 
 // ===== BUSCAR + CATEGORÍAS RÁPIDAS =====
 const search = document.getElementById("search");
+const searchForm = document.getElementById("search-form");
 const chips = document.querySelectorAll(".chip");
 const crumb = document.getElementById("crumb-cat");
 const cardsAll = [...document.querySelectorAll(".products-grid .card")];
+
+searchForm?.addEventListener("submit", (e) => {
+  e.preventDefault();
+  runFilters();
+  document.getElementById("productos")?.scrollIntoView({ behavior: "smooth" });
+});
 
 function debounce(fn, wait = 160) {
   let t;
@@ -186,26 +193,87 @@ function activeCategory() {
   return act;
 }
 
+function getCheckedValues(selector) {
+  return new Set(
+    [...document.querySelectorAll(selector)]
+      .filter((el) => el.checked)
+      .map((el) => el.value)
+  );
+}
+
 function runFilters() {
   const term = (search?.value || "").toLowerCase().trim();
-  const cat = activeCategory();
+  const chipCat = activeCategory(); // "*" o "Guantes" etc.
+
+  // Filtros laterales (si existen)
+  const checkedCats = getCheckedValues('#filters input[name="cat"]');
+  const checkedBrands = getCheckedValues('#filters input[name="brand"]');
 
   cardsAll.forEach((card) => {
     const title =
-      card.querySelector(".card-title")?.textContent.toLowerCase() || "";
+      card.querySelector(".card-title")?.textContent?.toLowerCase().trim() ||
+      "";
+
     const attrs = [...card.querySelectorAll(".card-attrs li")]
-      .map((li) => li.textContent.toLowerCase())
+      .map((li) => li.textContent?.toLowerCase().trim())
       .join(" ");
-    const sku = (card.dataset.sku || "").toLowerCase();
-    const byTerm = !term || [title, attrs, sku].some((t) => t.includes(term));
-    const byCat = cat === "*" || card.dataset.category === cat;
-    card.dataset.hidden = !(byTerm && byCat);
+
+    const sku = (card.dataset.sku || "").toLowerCase().trim();
+    const catTxt = (card.dataset.category || "").toLowerCase().trim();
+    const brandTxt = (card.dataset.brand || "").toLowerCase().trim();
+    const prodTxt = (card.dataset.product || "").toLowerCase().trim();
+
+    // Todo lo “buscable” en un solo string
+    const haystack =
+      `${title} ${attrs} ${sku} ${catTxt} ${brandTxt} ${prodTxt}`.trim();
+
+    // Ahora sí: si escribís "guantes" matchea por data-category
+    const byTerm = !term || haystack.includes(term);
+
+    // Chip: si no es "*", obliga esa categoría
+    const byChipCat = chipCat === "*" || card.dataset.category === chipCat;
+
+    // Sidebar: si no hay nada tildado en una dimensión, NO muestra nada
+    const catBoxes = document.querySelectorAll('#filters input[name="cat"]');
+    const brandBoxes = document.querySelectorAll(
+      '#filters input[name="brand"]'
+    );
+
+    const bySideCat = !catBoxes.length
+      ? true
+      : checkedCats.size > 0 && checkedCats.has(card.dataset.category);
+
+    const bySideBrand = !brandBoxes.length
+      ? true
+      : checkedBrands.size > 0 && checkedBrands.has(card.dataset.brand);
+
+    card.dataset.hidden = !(byTerm && byChipCat && bySideCat && bySideBrand);
   });
 
   applyPaging(true); // reinicia paginación tras filtrar
 }
 
-search?.addEventListener("input", debounce(runFilters));
+search?.addEventListener(
+  "input",
+  debounce(() => {
+    runFilters();
+
+    // Si hay texto, baja a la sección productos para que se vea el filtro
+    const termNow = (search?.value || "").trim();
+    if (termNow) {
+      document
+        .getElementById("productos")
+        ?.scrollIntoView({ behavior: "smooth" });
+    }
+  })
+);
+// Botón "Buscar" (submit del form)
+searchForm?.addEventListener("submit", (e) => {
+  e.preventDefault();
+  runFilters();
+  document.getElementById("productos")?.scrollIntoView({ behavior: "smooth" });
+});
+
 chips.forEach((chip) => {
   chip.addEventListener("click", () => {
     chips.forEach((c) => c.classList.remove("is-active"));
@@ -219,39 +287,26 @@ const filters = document.getElementById("filters");
 document
   .getElementById("toggle-filters")
   ?.addEventListener("click", () => filters?.classList.toggle("open"));
-document.getElementById("clear-filters")?.addEventListener("click", () => {
-  filters
-    ?.querySelectorAll("input[type=checkbox]")
-    .forEach((cb) => (cb.checked = true));
+
+filters?.addEventListener("change", () => {
   runFilters();
 });
-filters?.addEventListener("change", () => {
-  const cats = new Set(
-    [...filters.querySelectorAll("input[name=cat]:checked")].map((i) => i.value)
-  );
-  const brands = new Set(
-    [...filters.querySelectorAll("input[name=brand]:checked")].map(
-      (i) => i.value
-    )
-  );
-  cardsAll.forEach((card) => {
-    const okCat = !cats.size || cats.has(card.dataset.category);
-    const okBrand = !brands.size || brands.has(card.dataset.brand);
-    card.dataset.hidden = !(okCat && okBrand);
-  });
-  applyPaging(true);
-});
 
-// ===== Botón "Limpiar" filtros =====
-const clearBtn = document.getElementById("clear-filters");
+document.getElementById("clear-filters")?.addEventListener("click", () => {
+  // 1) DESTILDAR todos los filtros laterales (queda todo en blanco)
+  document
+    .querySelectorAll('#filters input[type="checkbox"]')
+    .forEach((cb) => (cb.checked = false));
 
-clearBtn?.addEventListener("click", () => {
-  // Buscar todos los checkboxes dentro del aside #filters
-  const checks = document.querySelectorAll('#filters input[type="checkbox"]');
-  checks.forEach((cb) => (cb.checked = false));
+  // 2) Volver chip a "Todas"
+  chips.forEach((c) => c.classList.remove("is-active"));
+  document.querySelector('.chip[data-cat="*"]')?.classList.add("is-active");
 
-  // Opcional: si tenés una función que re-aplica filtros, llamala acá
-  // applyFilters();   <-- si existe en tu código
+  // 3) Limpiar búsqueda
+  if (search) search.value = "";
+
+  // 4) Refiltrar + paginar
+  runFilters();
 });
 
 // ===== PAGINACIÓN "Cargar más" / "Mostrar menos" =====
