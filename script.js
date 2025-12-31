@@ -95,6 +95,9 @@ function openModal(producto = "") {
   modal.classList.add("open");
   modal.setAttribute("aria-hidden", "false");
 
+  // >>> NUEVO: bloquea scroll del fondo
+  document.body.classList.add("modal-open");
+
   // Precargar el textarea con el producto si corresponde
   if (producto && form) {
     const ta = form.querySelector("textarea[name='mensaje']");
@@ -132,6 +135,10 @@ function closeModal() {
   if (!modal) return;
   modal.classList.remove("open");
   modal.setAttribute("aria-hidden", "true");
+
+  // >>> NUEVO: habilita scroll del fondo
+  document.body.classList.remove("modal-open");
+
   if (modal._trap) modal.removeEventListener("keydown", modal._trap);
   if (lastFocused) lastFocused.focus();
   // >>> NUEVO: restablece los enlaces sin producto

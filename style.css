@@ -692,33 +692,47 @@ body {
 .modal {
   position: fixed;
   inset: 0;
+  width: 100vw;
+  height: 100dvh;
   background: rgba(2, 6, 23, 0.55);
+
+  /* centrado real */
   display: none;
+  align-items: center;
+  justify-content: center;
+
+  /* margen de seguridad */
   padding: 16px;
 
-  /* más alto para que tape TODO (incluye el WhatsApp) */
   z-index: 99999;
 }
 
 .modal.open {
-  display: block;
+  display: flex;
 }
 
 .modal-dialog {
   background: #fff;
-  width: min(520px, calc(100% - 32px));
-  max-width: 520px;
 
-  /* centrado real, sin depender de flex */
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  /* CLAVE: descuenta el padding (16px + 16px) */
+  width: min(520px, calc(100vw - 32px));
+
+  /* CLAVE: si el contenido crece, scrollea adentro */
+  max-height: calc(100dvh - 32px);
+  overflow: auto;
+
+  margin: 0;
+  box-sizing: border-box;
 
   border-radius: 16px;
   border: 1px solid #e5e7eb;
   box-shadow: 0 18px 50px rgba(2, 6, 23, 0.18);
   padding: 18px 18px 22px;
+
+  position: relative;
+}
+body.modal-open {
+  overflow: hidden;
 }
 
 .modal-title {
