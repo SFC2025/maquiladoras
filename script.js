@@ -233,7 +233,7 @@ function runFilters() {
     // Chip: si no es "*", obliga esa categoría
     const byChipCat = chipCat === "*" || card.dataset.category === chipCat;
 
-    // Sidebar: si no hay nada tildado en una dimensión, NO muestra nada
+    // Sidebar: si no hay nada tildado en un grupo, se interpreta como "todas"
     const catBoxes = document.querySelectorAll('#filters input[name="cat"]');
     const brandBoxes = document.querySelectorAll(
       '#filters input[name="brand"]'
@@ -241,11 +241,11 @@ function runFilters() {
 
     const bySideCat = !catBoxes.length
       ? true
-      : checkedCats.size > 0 && checkedCats.has(card.dataset.category);
+      : checkedCats.size === 0 || checkedCats.has(card.dataset.category);
 
     const bySideBrand = !brandBoxes.length
       ? true
-      : checkedBrands.size > 0 && checkedBrands.has(card.dataset.brand);
+      : checkedBrands.size === 0 || checkedBrands.has(card.dataset.brand);
 
     card.dataset.hidden = !(byTerm && byChipCat && bySideCat && bySideBrand);
   });
@@ -293,10 +293,10 @@ filters?.addEventListener("change", () => {
 });
 
 document.getElementById("clear-filters")?.addEventListener("click", () => {
-  // 1) DESTILDAR todos los filtros laterales (queda todo en blanco)
+  // 1) Reset: dejar todos los filtros laterales tildados (estado "todo")
   document
     .querySelectorAll('#filters input[type="checkbox"]')
-    .forEach((cb) => (cb.checked = false));
+    .forEach((cb) => (cb.checked = true));
 
   // 2) Volver chip a "Todas"
   chips.forEach((c) => c.classList.remove("is-active"));
