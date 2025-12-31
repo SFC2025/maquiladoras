@@ -762,8 +762,11 @@ body {
 /* ===== WHATSAPP FAB ===== */
 .whatsapp-fab {
   position: fixed;
-  right: max(14px, env(safe-area-inset-right, 0px) + 12px);
-  bottom: max(14px, env(safe-area-inset-bottom, 0px) + 12px);
+
+  /* más “adentro” para que NO se corte en mobile */
+  right: calc(env(safe-area-inset-right, 0px) + 18px);
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 18px);
+
   z-index: 50;
   width: 60px;
   height: 60px;
@@ -777,8 +780,13 @@ body {
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
   transition: transform 0.16s ease, box-shadow 0.22s ease, filter 0.2s ease;
+}
 
-  transform: translateZ(0);
+@media (max-width: 560px) {
+  .whatsapp-fab {
+    right: calc(env(safe-area-inset-right, 0px) + 22px);
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 22px);
+  }
 }
 
 .whatsapp-fab img {
